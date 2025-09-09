@@ -336,7 +336,98 @@
   background: #fff;
   box-shadow: 0 0 20px #fff;
 }
+/* Resume Button */
+.resume-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  background: #fff;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #ffffff;
+  transition: transform 0.3s, background 0.3s;
+  display: block;
+  margin: 1.5rem auto; /* auto centers horizontally */
+}
 
+.resume-btn:hover {
+  transform: scale(1.05);
+  background: #ffffff;
+  color: #05e2ff;
+}
+
+/* Overlay styles */
+.overlay {
+  display: none;                 /* hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(6px);
+}
+
+.overlay-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.resume-img {
+  max-height: 90vh;     /* take up 90% of screen height */
+  width: auto;          /* scale width automatically */
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00eeff;
+  display: block;
+  margin: 0 auto;       /* center horizontally */
+}
+
+@media (max-width: 768px) {
+  .resume-img {
+    max-width: 95%;   /* use more width on small screens */
+    max-height: 85vh; /* slightly less height for spacing */
+  }
+}
+/* Close button */
+/* Close button - desktop */
+.close-btn {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  background: rgb(0, 0, 0);
+  height: 40px;              /* fixed height */
+  width: 40px;               /* fixed width */
+  display: flex;             /* center the icon */
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.close-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ✅ Mobile adjustments */
+@media (max-width: 768px) {
+  .close-btn {
+    top: -60px;                /* place above resume */
+    left: 50%;                 /* start from center */
+    right: auto;               /* remove right positioning */
+    transform: translateX(-50%); /* perfectly center */
+    height: 50px;              /* bigger for thumb */
+    width: 50px;
+    font-size: 2.2rem;
+  }
+}
 
 #bg-video {
   position: fixed;
@@ -382,6 +473,7 @@
   <p style="color: rgb(255, 255, 255);">
     I turn ideas into reality through design and code. Let’s build something amazing together.
   </p>
+    <button id="resumeBtn" class="resume-btn">certificate</button>
 </section>
 
 <br><br><br>
@@ -417,6 +509,13 @@
   </div>
 
 </section>
+<!-- Resume Overlay -->
+<div id="resumeOverlay" class="overlay">
+  <div class="overlay-content">
+    <span id="closeOverlay" class="close-btn">&times;</span>
+    <img src="certificate.jpeg" alt="Certificate" class="resume-img">
+  </div>
+</div>
 
   <footer style="color: #ffffff;">
     mail me at : deepakdhivakar2007＠gmail.com
@@ -478,6 +577,26 @@ const words = ["Developer", "Designer", "Creator"];
   }
 
   document.addEventListener("DOMContentLoaded", type);
+</script>
+<script>
+  const resumeBtn = document.getElementById("resumeBtn");
+  const resumeOverlay = document.getElementById("resumeOverlay");
+  const closeOverlay = document.getElementById("closeOverlay");
+
+  resumeBtn.addEventListener("click", () => {
+    resumeOverlay.style.display = "flex";  // show overlay
+  });
+
+  closeOverlay.addEventListener("click", () => {
+    resumeOverlay.style.display = "none";  // hide overlay
+  });
+
+  // Optional: close when clicking outside image
+  resumeOverlay.addEventListener("click", (e) => {
+    if (e.target === resumeOverlay) {
+      resumeOverlay.style.display = "none";
+    }
+  });
 </script>
 
 </body>
